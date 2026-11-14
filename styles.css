@@ -1,0 +1,520 @@
+/* ==========================================================================
+   Token Desain (Custom Properties) — Warna, Tipografi, dan Skala Spacing
+   ========================================================================== */
+:root {
+  --warna-latar: #f8fafc;
+  --warna-permukaan: #ffffff;
+  --warna-teks: #0f172a;
+  --warna-teks-sekunder: #475569;
+  --warna-aksen: #1d4ed8;
+  --warna-aksen-gelap: #1e40af;
+  --warna-sukses-bg: #dcfce7;
+  --warna-sukses-teks: #166534;
+  --warna-bahaya: #dc2626;
+  --warna-batas: #e2e8f0;
+
+  --ruang-1: 8px;
+  --ruang-2: 16px;
+  --ruang-3: 24px;
+  --ruang-4: 32px;
+
+  --radius-kecil: 8px;
+  --radius-kartu: 12px;
+  --bayangan-kartu: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+/* ==========================================================================
+   Reset Ringan & Aksesibilitas Fokus
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: var(--warna-latar);
+  color: var(--warna-teks);
+  line-height: 1.5;
+}
+
+/* Indikator fokus jelas khusus navigasi keyboard */
+:focus-visible {
+  outline: 3px solid var(--warna-aksen);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  padding: var(--ruang-1) var(--ruang-2);
+  background: var(--warna-aksen);
+  color: #ffffff;
+  border-radius: var(--radius-kecil);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: var(--ruang-2);
+  top: var(--ruang-2);
+  z-index: 100;
+}
+
+/* ==========================================================================
+   Komponen 1: Header & Navigasi Responsif
+   ========================================================================== */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--ruang-2);
+  padding: var(--ruang-2) var(--ruang-3);
+  background-color: var(--warna-permukaan);
+  border-bottom: 1px solid var(--warna-batas);
+}
+
+.brand-grup {
+  display: flex;
+  align-items: center;
+  gap: var(--ruang-2);
+}
+
+.brand-logo {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--warna-aksen);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+.badge-sso {
+  display: inline-block;
+  padding: 2px var(--ruang-1);
+  background-color: var(--warna-sukses-bg);
+  color: var(--warna-sukses-teks);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.nav-utama ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruang-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-utama a {
+  color: var(--warna-teks);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px var(--ruang-1);
+  border-radius: var(--radius-kecil);
+}
+
+.nav-utama a:hover,
+.nav-utama a[aria-current="page"] {
+  background-color: #eff6ff;
+  color: var(--warna-aksen);
+}
+
+#tombol-menu {
+  display: none;
+}
+
+/* ==========================================================================
+   Tata Letak Utama CSS Grid (Desktop & Ponsel)
+   ========================================================================== */
+.tata-letak {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--ruang-3);
+  max-width: 1180px;
+  margin: var(--ruang-3) auto;
+  padding: 0 var(--ruang-2);
+  align-items: start;
+}
+
+.kartu-panel {
+  background-color: var(--warna-permukaan);
+  border: 1px solid var(--warna-batas);
+  border-radius: var(--radius-kartu);
+  padding: var(--ruang-3);
+  box-shadow: var(--bayangan-kartu);
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  line-height: 1.25;
+}
+
+.subjudul {
+  margin-top: 0;
+  color: var(--warna-teks-sekunder);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Komponen 2: Form Filter & Validasi
+   ========================================================================== */
+.form-filter {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr auto;
+  gap: var(--ruang-2);
+  align-items: end;
+}
+
+.grup-input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.grup-input label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.grup-input input,
+.grup-input select {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-kecil);
+  background-color: #ffffff;
+}
+
+/* Selektor :has() untuk menandai grup input yang tidak valid */
+.grup-input:has(input[aria-invalid="true"]) input {
+  border-color: var(--warna-bahaya);
+  background-color: #fef2f2;
+}
+
+.pesan-galat {
+  margin: 0;
+  min-height: 1.2em;
+  color: var(--warna-bahaya);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.aksi-form {
+  display: flex;
+  gap: var(--ruang-1);
+  padding-bottom: 1.2em;
+}
+
+/* ==========================================================================
+   Tombol Konsisten
+   ========================================================================== */
+button {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px var(--ruang-2);
+  border-radius: var(--radius-kecil);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.tombol-utama {
+  background-color: var(--warna-aksen);
+  color: #ffffff;
+}
+
+.tombol-utama:hover:not(:disabled) {
+  background-color: var(--warna-aksen-gelap);
+}
+
+.tombol-sekunder {
+  background-color: #ffffff;
+  color: var(--warna-teks);
+  border-color: #cbd5e1;
+}
+
+.tombol-sekunder:hover:not(:disabled) {
+  background-color: #f1f5f9;
+}
+
+.tombol-bahaya {
+  background-color: #fef2f2;
+  color: var(--warna-bahaya);
+  border-color: #fecaca;
+}
+
+.tombol-bahaya:hover:not(:disabled) {
+  background-color: #fee2e2;
+}
+
+/* ==========================================================================
+   Komponen 3: Galeri Kartu Keberangkatan (CSS Grid Auto-Fit)
+   ========================================================================== */
+#katalog {
+  margin-top: var(--ruang-3);
+}
+
+.kepala-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--ruang-2);
+}
+
+.kepala-section h2 {
+  margin-bottom: 0;
+}
+
+.lencana-info {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--warna-teks-sekunder);
+  background-color: #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.galeri-trip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--ruang-2);
+}
+
+.kartu-trip {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--ruang-2);
+  background-color: var(--warna-permukaan);
+  border: 1px solid var(--warna-batas);
+  border-radius: var(--radius-kartu);
+  padding: var(--ruang-2);
+  box-shadow: var(--bayangan-kartu);
+}
+
+.kartu-trip[hidden] {
+  display: none;
+}
+
+.kepala-kartu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kepala-kartu h3 {
+  margin: 4px 0 2px;
+  font-size: 1.05rem;
+}
+
+.meta-kendaraan {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--warna-teks-sekunder);
+}
+
+.detail-trip {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.detail-trip div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--ruang-1);
+  border-bottom: 1px dashed var(--warna-batas);
+  padding-bottom: 4px;
+}
+
+.detail-trip dt {
+  color: var(--warna-teks-sekunder);
+}
+
+.detail-trip dd {
+  margin: 0;
+  font-weight: 500;
+  text-align: right;
+}
+
+.harga {
+  color: var(--warna-aksen);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Komponen 4: Panel Ringkasan Pesanan
+   ========================================================================== */
+.panel-pesanan {
+  position: sticky;
+  top: var(--ruang-2);
+}
+
+.daftar-pesanan {
+  list-style: none;
+  margin: 0 0 var(--ruang-2);
+  padding: 0;
+  display: grid;
+  gap: var(--ruang-1);
+}
+
+.daftar-pesanan .kosong {
+  color: var(--warna-teks-sekunder);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.item-pesanan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--ruang-1);
+  padding: var(--ruang-1);
+  background-color: var(--warna-latar);
+  border-radius: var(--radius-kecil);
+  font-size: 0.875rem;
+}
+
+.kontrol-jumlah {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tombol-mini {
+  padding: 2px 8px;
+  font-size: 0.85rem;
+}
+
+.ringkasan-biaya {
+  border-top: 1px solid var(--warna-batas);
+  padding-top: var(--ruang-2);
+  display: grid;
+  gap: var(--ruang-1);
+}
+
+.baris-biaya {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aksi-pesanan {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--ruang-1);
+  margin-top: var(--ruang-2);
+}
+
+.teks-status {
+  margin: var(--ruang-1) 0 0;
+  min-height: 1.3em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--warna-sukses-teks);
+}
+
+/* ==========================================================================
+   Komponen 5: Dialog Konfirmasi Modal & Footer
+   ========================================================================== */
+dialog {
+  border: 1px solid var(--warna-batas);
+  border-radius: var(--radius-kartu);
+  padding: var(--ruang-3);
+  max-width: 400px;
+  width: calc(100% - 32px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+}
+
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.aksi-dialog {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ruang-1);
+  margin-top: var(--ruang-3);
+}
+
+.site-footer {
+  margin-top: var(--ruang-4);
+  padding: var(--ruang-3);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--warna-teks-sekunder);
+  background-color: var(--warna-permukaan);
+  border-top: 1px solid var(--warna-batas);
+}
+
+/* ==========================================================================
+   Responsivitas Layar Tablet & Ponsel
+   ========================================================================== */
+@media (max-width: 860px) {
+  .tata-letak {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-pesanan {
+    position: static;
+  }
+
+  .form-filter {
+    grid-template-columns: 1fr;
+  }
+
+  .aksi-form {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  #tombol-menu {
+    display: inline-block;
+  }
+
+  .nav-utama {
+    width: 100%;
+  }
+
+  .nav-utama[hidden] {
+    display: none;
+  }
+
+  .nav-utama ul {
+    flex-direction: column;
+    padding-top: var(--ruang-1);
+    border-top: 1px solid var(--warna-batas);
+  }
+}
+
+/* Sorotan sementara saat seksi tujuan dipilih dari navigasi */
+.kartu-panel.disorot {
+  border-color: var(--warna-aksen);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.18);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.seksi-bantuan {
+  margin-top: var(--ruang-3);
+}
+
+.daftar-bantuan {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: var(--ruang-1);
+  color: var(--warna-teks-sekunder);
+}
