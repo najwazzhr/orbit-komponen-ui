@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ORBIT · Katalog Keberangkatan &amp; Jastip Kampus</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#konten-utama">Lewati ke konten utama</a>
+
+    <!-- KOMPONEN 1: Header & Navigasi Responsif (Disclosure Pattern) -->
+    <header class="site-header">
+      <div class="brand-grup">
+        <a class="brand-logo" href="#katalog">ORBIT</a>
+        <span class="badge-sso" aria-label="Status akun terverifikasi">✓ SSO NIM Terverifikasi</span>
+      </div>
+
+      <button
+        id="tombol-menu"
+        class="tombol-sekunder"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-utama"
+      >
+        Menu
+      </button>
+
+      <nav id="menu-utama" class="nav-utama" aria-label="Navigasi utama">
+        <ul>
+          <li><a href="#katalog" data-nav="beranda">Beranda</a></li>
+          <li><a href="#filter-section" data-nav="cari-rute" aria-current="page">Cari Rute</a></li>
+          <li><a href="#panel-pesanan" data-nav="pesanan">Pesanan Saya</a></li>
+          <li><a href="#bantuan-section" data-nav="bantuan">Bantuan</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Tata Letak Utama CSS Grid -->
+    <div class="tata-letak">
+      <main id="konten-utama">
+        <!-- KOMPONEN 2: Filter & Pencarian Jadwal dengan Constraint Validation -->
+        <section id="filter-section" class="kartu-panel" aria-labelledby="judul-filter">
+          <h1 id="judul-filter">Katalog Keberangkatan Real-Time</h1>
+          <p class="subjudul">
+            Pilih tebengan motor atau titip barang sesama mahasiswa terverifikasi SSO kampus.
+          </p>
+
+          <form id="form-filter" class="form-filter" novalidate>
+            <div class="grup-input">
+              <label for="input-tujuan">Tujuan / Titik Jemput</label>
+              <input
+                id="input-tujuan"
+                name="tujuan"
+                type="text"
+                minlength="3"
+                placeholder="Contoh: Sekaran, Fakultas Teknik, Gedung A"
+                aria-describedby="galat-tujuan"
+              >
+              <p id="galat-tujuan" class="pesan-galat" aria-live="polite"></p>
+            </div>
+
+            <div class="grup-input">
+              <label for="pilih-layanan">Jenis Layanan</label>
+              <select id="pilih-layanan" name="layanan">
+                <option value="semua">Semua Layanan</option>
+                <option value="tebengan">Tebengan Motor</option>
+                <option value="jastip">Jastip Kampus</option>
+              </select>
+            </div>
+
+            <div class="aksi-form">
+              <button id="tombol-cari" class="tombol-utama" type="submit">
+                Cari Jadwal
+              </button>
+              <button id="tombol-reset-filter" class="tombol-sekunder" type="button">
+                Reset
+              </button>
+            </div>
+          </form>
+
+          <p id="status-filter" class="teks-status" role="status"></p>
+        </section>
+
+        <!-- KOMPONEN 3: Galeri Kartu Keberangkatan Responsif -->
+        <section id="katalog" aria-labelledby="judul-katalog">
+          <div class="kepala-section">
+            <h2 id="judul-katalog">Jadwal Tersedia Hari Ini</h2>
+            <span id="jumlah-hasil" class="lencana-info">4 jadwal aktif</span>
+          </div>
+
+          <div id="daftar-trip" class="galeri-trip">
+            <!-- Kartu Trip 1 -->
+            <article
+              class="kartu-trip"
+              data-id="trip-1"
+              data-driver="Dika Pratama"
+              data-rute="Sekaran → Kampus Utama"
+              data-jenis="tebengan"
+              data-tarif="6000"
+            >
+              <div class="kepala-kartu">
+                <img
+                  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect width='48' height='48' rx='24' fill='%23dbeafe'/><text x='50%' y='55%' font-family='sans-serif' font-size='18' font-weight='bold' fill='%231d4ed8' text-anchor='middle'>DP</text></svg>"
+                  alt="Avatar driver Dika Pratama"
+                  width="48"
+                  height="48"
+                >
+                <div>
+                  <span class="badge-sso">✓ Terverifikasi</span>
+                  <h3>Dika Pratama</h3>
+                  <p class="meta-kendaraan">Honda Vario 150 · Tebengan</p>
+                </div>
+              </div>
+              <dl class="detail-trip">
+                <div><dt>Rute</dt><dd>Sekaran → Kampus Utama</dd></div>
+                <div><dt>Berangkat</dt><dd>07.15 WIB · Sisa 1 kursi</dd></div>
+                <div><dt>Tarif</dt><dd class="harga">Rp6.000</dd></div>
+              </dl>
+              <button
+                class="tombol-utama tombol-pesan"
+                type="button"
+                aria-label="Pesan tebengan Dika Pratama rute Sekaran ke Kampus Utama"
+              >
+                + Tambah ke Pesanan
+              </button>
+            </article>
+
+            <!-- Kartu Trip 2 -->
+            <article
+              class="kartu-trip"
+              data-id="trip-2"
+              data-driver="Faris Nugroho"
+              data-rute="Gunungpati → Fakultas Teknik"
+              data-jenis="tebengan"
+              data-tarif="7500"
+            >
+              <div class="kepala-kartu">
+                <img
+                  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect width='48' height='48' rx='24' fill='%23dcfce7'/><text x='50%' y='55%' font-family='sans-serif' font-size='18' font-weight='bold' fill='%2315803d' text-anchor='middle'>FN</text></svg>"
+                  alt="Avatar driver Faris Nugroho"
+                  width="48"
+                  height="48"
+                >
+                <div>
+                  <span class="badge-sso">✓ Terverifikasi</span>
+                  <h3>Faris Nugroho</h3>
+                  <p class="meta-kendaraan">Honda Beat FI · Tebengan</p>
+                </div>
+              </div>
+              <dl class="detail-trip">
+                <div><dt>Rute</dt><dd>Gunungpati → Fakultas Teknik</dd></div>
+                <div><dt>Berangkat</dt><dd>07.30 WIB · Sisa 2 kursi</dd></div>
+                <div><dt>Tarif</dt><dd class="harga">Rp7.500</dd></div>
+              </dl>
+              <button
+                class="tombol-utama tombol-pesan"
+                type="button"
+                aria-label="Pesan tebengan Faris Nugroho rute Gunungpati ke Fakultas Teknik"
+              >
+                + Tambah ke Pesanan
+              </button>
+            </article>
+
+            <!-- Kartu Trip 3 -->
+            <article
+              class="kartu-trip"
+              data-id="trip-3"
+              data-driver="Siti Rahmawati"
+              data-rute="Kantin Pusat → Gedung A"
+              data-jenis="jastip"
+              data-tarif="5000"
+            >
+              <div class="kepala-kartu">
+                <img
+                  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect width='48' height='48' rx='24' fill='%23fef3c7'/><text x='50%' y='55%' font-family='sans-serif' font-size='18' font-weight='bold' fill='%23b45309' text-anchor='middle'>SR</text></svg>"
+                  alt="Avatar kurir jastip Siti Rahmawati"
+                  width="48"
+                  height="48"
+                >
+                <div>
+                  <span class="badge-sso">✓ Terverifikasi</span>
+                  <h3>Siti Rahmawati</h3>
+                  <p class="meta-kendaraan">Honda Scoopy · Jastip</p>
+                </div>
+              </div>
+              <dl class="detail-trip">
+                <div><dt>Rute</dt><dd>Kantin Pusat → Gedung A</dd></div>
+                <div><dt>Berangkat</dt><dd>11.45 WIB · Slot 3 titipan</dd></div>
+                <div><dt>Tarif</dt><dd class="harga">Rp5.000</dd></div>
+              </dl>
+              <button
+                class="tombol-utama tombol-pesan"
+                type="button"
+                aria-label="Pesan jastip Siti Rahmawati rute Kantin Pusat ke Gedung A"
+              >
+                + Tambah ke Pesanan
+              </button>
+            </article>
+
+            <!-- Kartu Trip 4 -->
+            <article
+              class="kartu-trip"
+              data-id="trip-4"
+              data-driver="Raka Wijaya"
+              data-rute="Sampangan → Perpustakaan Pusat"
+              data-jenis="jastip"
+              data-tarif="8000"
+            >
+              <div class="kepala-kartu">
+                <img
+                  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect width='48' height='48' rx='24' fill='%23ede9fe'/><text x='50%' y='55%' font-family='sans-serif' font-size='18' font-weight='bold' fill='%236d28d9' text-anchor='middle'>RW</text></svg>"
+                  alt="Avatar kurir jastip Raka Wijaya"
+                  width="48"
+                  height="48"
+                >
+                <div>
+                  <span class="badge-sso">✓ Terverifikasi</span>
+                  <h3>Raka Wijaya</h3>
+                  <p class="meta-kendaraan">Yamaha NMAX · Jastip</p>
+                </div>
+              </div>
+              <dl class="detail-trip">
+                <div><dt>Rute</dt><dd>Sampangan → Perpustakaan Pusat</dd></div>
+                <div><dt>Berangkat</dt><dd>12.30 WIB · Slot 2 titipan</dd></div>
+                <div><dt>Tarif</dt><dd class="harga">Rp8.000</dd></div>
+              </dl>
+              <button
+                class="tombol-utama tombol-pesan"
+                type="button"
+                aria-label="Pesan jastip Raka Wijaya rute Sampangan ke Perpustakaan Pusat"
+              >
+                + Tambah ke Pesanan
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <!-- Bagian Bantuan Tersendiri -->
+        <section id="bantuan-section" class="kartu-panel seksi-bantuan" aria-labelledby="judul-bantuan">
+          <h2 id="judul-bantuan">Pusat Bantuan &amp; Panduan ORBIT</h2>
+          <ul class="daftar-bantuan">
+            <li><strong>Verifikasi SSO NIM:</strong> Seluruh pengemudi dan penumpang wajib masuk menggunakan akun mahasiswa kampus aktif.</li>
+            <li><strong>Transparansi Tarif:</strong> Tarif dihitung otomatis per rute/zona sebelum pemesanan dikonfirmasi.</li>
+            <li><strong>Pembayaran QRIS:</strong> Selesaikan pembayaran non-tunai dalam 5 menit setelah konfirmasi pesanan.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- KOMPONEN 4: Panel Ringkasan Pesanan & Kalkulator Tarif -->
+      <aside id="panel-pesanan" class="kartu-panel panel-pesanan" aria-labelledby="judul-pesanan">
+        <h2 id="judul-pesanan">Ringkasan Pesanan</h2>
+        <p class="subjudul">Kelola kursi tebengan atau slot jastip pilihanmu.</p>
+
+        <ul id="daftar-pesanan" class="daftar-pesanan">
+          <li class="kosong">Belum ada jadwal yang dipilih.</li>
+        </ul>
+
+        <div class="ringkasan-biaya">
+          <div class="baris-biaya">
+            <span>Total Item</span>
+            <strong id="total-item">0</strong>
+          </div>
+          <div class="baris-biaya">
+            <span>Estimasi Tarif</span>
+            <strong id="total-tarif">Rp0</strong>
+          </div>
+        </div>
+
+        <div class="aksi-pesanan">
+          <button id="tombol-konfirmasi" class="tombol-utama" type="button" disabled>
+            Lanjut Bayar QRIS
+          </button>
+          <button id="tombol-batalkan" class="tombol-bahaya" type="button" disabled>
+            Kosongkan
+          </button>
+        </div>
+
+        <p id="status-pesanan" class="teks-status" role="status"></p>
+      </aside>
+    </div>
+
+    <!-- KOMPONEN 5: Dialog Konfirmasi Modal (<dialog>) -->
+    <dialog id="dialog-konfirmasi" aria-labelledby="judul-dialog">
+      <h2 id="judul-dialog">Konfirmasi Aksi Pesanan</h2>
+      <p id="deskripsi-dialog">Apakah Anda yakin ingin memproses tindakan ini?</p>
+      <div class="aksi-dialog">
+        <button id="dialog-tidak" class="tombol-sekunder" type="button">Batal</button>
+        <button id="dialog-ya" class="tombol-utama" type="button">Ya, Lanjutkan</button>
+      </div>
+    </dialog>
+
+    <footer id="footer-info" class="site-footer">
+      <p>© 2026 ORBIT · Platform Tebengan &amp; Jastip Kampus Terverifikasi SSO NIM</p>
+    </footer>
+  </body>
+</html>
